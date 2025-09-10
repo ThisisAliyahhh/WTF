@@ -75,30 +75,15 @@ else{
     }
 
     else{
-        // Checks account type
+        
+        // Deduct amount from User1 
+        User1Balance -= amount;
+        
+        // Add amount from User4 
+        User4Balance += amount;
 
-        // Deduct amount from User1 and checks type
-        if (User1type == "Savings"){
-            User1Balance -= amount;
-            Savings = User1Balance * 0.2;
-            User1Balance += Savings;
-        }
-        else{
-            User1Balance = User1Balance - amount - Checking;
-        }
-
-        // Add amount from User4 and caculates the savings 
-        if (User4type == "Savings"){
-            Savings = 0;
-            User4Balance += amount;
-            Savings = User4Balance * 0.2;
-            User4Balance += Savings;
-        }
-        else{
-            User4Balance = User4Balance + amount - Checking;
-        }
         console.log(`Transaction successful from ${User1Name} to ${User4Name}`);
-}
+    }
 }
 console.log(""); // For extra line break
 
@@ -118,37 +103,20 @@ else{
     }
 
     else{
-        // Checks account type
+        // Deduct amount from User2 
+        User2Balance -= amount;
 
-        // Deduct amount from User2 and checks type
-        if (User2type == "Savings"){
-            User2Balance -= amount;
-            Savings = 0;
-            Savings = User2Balance * 0.2;
-            User2Balance += Savings;
-        }
-        else{
-            User2Balance = User2Balance - amount - Checking;
-        }
-
-        // Add amount from User3 and caculates the savings 
-        if (User3type == "Savings"){
-            Savings = 0;
-            User3Balance += amount;
-            Savings = User3Balance * 0.2;
-            User3Balance += Savings;
-        }
-        else{
-            User3Balance = User3Balance + amount - Checking;
-        }
+        // Add amount from User3 
+        User3Balance += amount;
+       
         console.log(`Transaction successful from ${User2Name} to ${User3Name}`)
-}
+    }
 }
 console.log("") // For extra line break
 
 /* 
 Transaction between User1 and User2. 
-Withdrawal from User2 and Deposit to user2 
+Withdrawal from User2 and Deposit to user1
 Different currency 
 */
 
@@ -162,30 +130,14 @@ else{
     }
 
     else{
-        // Checks account type
-
-        // Deduct amount from User2 and checks type
-        if (User2type == "Savings"){
-            User2Balance -= amount;
-            Savings = User2Balance * 0.2;
-            User2Balance += Savings;
-        }
-        else{
-            User2Balance = User2Balance - amount - Checking;
-        }
+        // Deduct amount from User2 
+        User2Balance -= amount;
 
         // Add amount from User3 and caculates the savings 
-        if (User1type == "Savings"){
-            Savings = 0;
-            User1Balance += amount;
-            Savings = User1Balance * 0.2;
-            User1Balance += Savings;
-        }
-        else{
-            User1Balance = User1Balance + amount - Checking;
-        }
+        User1Balance += amount;
+        
         console.log(`Transaction successful from ${User2Name} to ${User1Name}`);
-}
+    }
 }
 console.log("") // For extra line break
 
@@ -201,32 +153,55 @@ if (User1currency != User2currency){
         console.log(`Withdrawal denied for ${User2Name}: Insufficient funds`);
     }
     else{
-        // Checks account type
+        // Deduct amount from User2 
+        User2Balance -= amount;
 
-        // Deduct amount from User2 and checks type
-        if (User2type == "Savings"){
-            User2Balance -= amount;
-            Savings = User2Balance * 0.2;
-            User2Balance += Savings;
-        }
-        else{
-            User2Balance = User2Balance - amount - Checking;
-        }
-
-        // Add amount from User3 and caculates the savings 
-        if (User1type == "Savings"){
-            Savings = 0;
-            User1Balance += amount; 
-            Savings = User1Balance * 0.2;
-            User1Balance += Savings;
-        }
-        else{
-            User1Balance = User1Balance + amount - Checking; //
-        }
+        // Add amount from User1 
+        User1Balance += amount; 
         User1Balance = parseInt(User1Balance /= 1500) // Converts back to USD
         console.log(`Transaction successful from ${User2Name} to ${User1Name}`);
     }
 }
+console.log("") // For extra line break
+
+//Monthly Maintanace
+
+// User1 Maintanace
+if (User1type == "Savings"){
+    Savings = User1Balance * 0.2;
+    User1Balance += Savings;
+}
+else{
+    User1Balance = User1Balance - Checking;
+}
+
+// User2 Maintanace
+if (User2type == "Savings"){
+    Savings = User2Balance * 0.2;
+    User2Balance += Savings;
+}
+else{
+    User2Balance = User2Balance - Checking;
+}
+
+// User3 Maintanace
+if (User3type == "Savings"){
+    Savings = User3Balance * 0.2;
+    User3Balance += Savings;
+}
+else{
+    User3Balance = User3Balance - Checking;
+}
+
+// User4 Maintanace
+if (User4type == "Savings"){
+    Savings = User4Balance * 0.2;
+    User4Balance += Savings;
+}
+else{
+    User4Balance = User4Balance - Checking;
+}
+
 console.log("") // For extra line break
 
 // Comparisons Checks for the hightest amount
