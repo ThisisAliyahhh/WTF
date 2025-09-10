@@ -47,7 +47,7 @@ let User4type = User4.type;
  
 
 //initial amount for all the users
-console.log("Initial Amount");
+console.log("===== Initial Amount =====");
 console.log(`${User1Name}: ${User1Balance}`);
 console.log(`${User2Name}: ${User2Balance}`);
 console.log(`${User3Name}: ${User3Balance}`);
@@ -191,10 +191,11 @@ console.log("") // For extra line break
 
 // Bonus
 if (User1currency != User2currency){
+    console.log("Retrying...")
+    console.log("Converting...")
     //USD to NGN 1USD = 1500 NGN
     if (User1currency == "USD"){
         User1Balance *=  1500;
-        User1currency = "NGN"
     }
     if (amount > User2Balance){
         console.log(`Withdrawal denied for ${User2Name}: Insufficient funds`);
@@ -215,13 +216,14 @@ if (User1currency != User2currency){
         // Add amount from User3 and caculates the savings 
         if (User1type == "Savings"){
             Savings = 0;
-            User1Balance += amount;
+            User1Balance += amount; 
             Savings = User1Balance * 0.2;
             User1Balance += Savings;
         }
         else{
-            User1Balance = User1Balance + amount - Checking;
+            User1Balance = User1Balance + amount - Checking; //
         }
+        User1Balance = parseInt(User1Balance /= 1500) // Converts back to USD
         console.log(`Transaction successful from ${User2Name} to ${User1Name}`);
     }
 }
@@ -229,10 +231,12 @@ console.log("") // For extra line break
 
 // Comparisons Checks for the hightest amount
 
-// Before comparison convert User4currency to NGN
+// Before comparison convert User1 and User4 currency to NGN
+if (User1currency == "USD"){
+        User1Balance *=  1500;
+}
 if (User4currency == "USD"){
         User4Balance *=  1500;
-        User4currency = "NGN"
 }
 
 // Assume User1 is both the highest and lowest
@@ -246,37 +250,45 @@ let lowestUserBalance = User1Balance;
 if (User2Balance > highestUserBalance){
     highestUserName = User2Name;
     highestUserBalance = User2Balance;
-    // if true compares highestBalnce with User3Balance
-    if(User3Balance > highestUserBalance){
-        highestUserName = User3Name;
-        highestUserBalance = User3Balance;
-    }
-    // if true compares highestBalnce with User4Balance
-    if (User4Balance > highestUserBalance){
-        highestUserName = User4Name;
-        highestUserBalance = User4Balance;
-    }
 }
+
+//compares highestBalnce with User3Balance
+if(User3Balance > highestUserBalance){
+    highestUserName = User3Name;
+    highestUserBalance = User3Balance;
+}
+
+//compares highestBalnce with User4Balance
+if (User4Balance > highestUserBalance){
+    highestUserName = User4Name;
+    highestUserBalance = User4Balance;
+}
+
 
 // compares lowestBalnce with User2Balance
 if (User2Balance < lowestUserBalance){
     lowestUserName = User2Name;
     lowestUserBalance = User2Balance;
-    
-    // if true compares lowestBalnce with User3Balance
-    if(User3Balance > lowestUserBalance){
-        lowestUserName = User3Name;
-        lowestUserBalance = User3Balance;
-    }
-    // if true compares lowestBalnce with User4Balance
-    if (User4Balance > lowestUserBalance){
-        lowestUserName = User4Name;
-        lowestUserBalance = User4Balance;
-    }
 }
 
-console.log(`Highest Balance is ${highestUserBalance}. Account Name: ${highestUserName}`);
-console.log(`Lowest Balance is ${lowestUserBalance}. Account Name: ${lowestUserName}`);
+//compares lowestBalnce with User3Balance
+if(User3Balance < lowestUserBalance){
+    lowestUserName = User3Name;
+    lowestUserBalance = User3Balance;
+}
+//compares lowestBalnce with User4Balance
+if (User4Balance < lowestUserBalance){
+    lowestUserName = User4Name;
+    lowestUserBalance = User4Balance;
+}
+
+
+console.log(`Highest Balance is ${highestUserBalance}. Account Name: ${highestUserName} in NGN`);
+console.log(`Lowest Balance is ${lowestUserBalance}. Account Name: ${lowestUserName} in NGN`);
+
+// convert User1 and User 4 back to USD
+User1Balance = parseInt(User1Balance / 1500);
+User4Balance = parseInt(User4Balance / 1500);
 
 console.log(""); // For extra line break
 
@@ -332,9 +344,9 @@ else{
 console.log("") // For extra line break
 
 
-console.log("Final Balance")
-console.log(`Account Name: ${User1Name}; Account Balance: ${User1Balance}; Account Status: ${User1Staus}`);
-console.log(`Account Name: ${User2Name}; Account Balance: ${User2Balance}; Account Status: ${User2Staus}`);
-console.log(`Account Name: ${User3Name}; Account Balance: ${User3Balance}; Account Status: ${User3Staus}`);
-console.log(`Account Name: ${User4Name}; Account Balance: ${User4Balance}; Account Status: ${User4Staus}`);
+console.log("===== Final Balance =====")
+console.log(`Account Name: ${User1Name}; Account Balance: ${User1Balance}; Currency: ${User1currency}; Account Type: ${User1type}; Account Status: ${User1Staus}`);
+console.log(`Account Name: ${User2Name}; Account Balance: ${User2Balance}; Currency: ${User2currency}; Account Type: ${User2type}; Account Status: ${User2Staus}`);
+console.log(`Account Name: ${User3Name}; Account Balance: ${User3Balance}; Currency: ${User3currency}; Account Type: ${User3type}; Account Status: ${User3Staus}`);
+console.log(`Account Name: ${User4Name}; Account Balance: ${User4Balance}; Currency: ${User4currency}; Account Type: ${User4type}; Account Status: ${User4Staus}`);
 
