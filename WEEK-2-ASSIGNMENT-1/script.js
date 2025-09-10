@@ -11,7 +11,7 @@ const User2 = {
     currency: "NGN",
     type: "Savings",
 };
-    const User3 = {
+const User3 = {
     name: "Olubunmi Elegbeleye",
     balance: 4000,
     currency: "NGN",
@@ -24,34 +24,14 @@ const User4 = {
     currency: "USD",
     type: "Checking",
 };
-
-let User1Name = User1.name;
-let User2Name = User2.name;
-let User3Name = User3.name;
-let User4Name = User4.name;
-
-let User1Balance = User1.balance;
-let User2Balance = User2.balance;
-let User3Balance = User3.balance;
-let User4Balance = User4.balance;
- 
-let User1currency = User1.currency;
-let User2currency = User2.currency;
-let User3currency = User3.currency;
-let User4currency = User4.currency;
- 
-let User1type = User1.type;
-let User2type = User2.type;
-let User3type = User3.type;
-let User4type = User4.type;
  
 
 //initial amount for all the users
 console.log("===== Initial Amount =====");
-console.log(`${User1Name}: ${User1Balance}`);
-console.log(`${User2Name}: ${User2Balance}`);
-console.log(`${User3Name}: ${User3Balance}`);
-console.log(`${User4Name}: ${User4Balance}`);
+console.log(`${User1.name}: ${User1.balance}`);
+console.log(`${User2.name}: ${User2.balance}`);
+console.log(`${User3.name}: ${User3.balance}`);
+console.log(`${User4.name}: ${User4.balance}`);
 console.log(""); // For extra line break
  
 let Savings = 0;
@@ -61,28 +41,28 @@ let amount = 1500;
 
 /* 
 Transaction between User1 and User4. 
-Withdrawal from User1 and Deposit to user2 
+Withdrawal from User1 and Deposit to user4 
 Same currentcy but insufficient fund also does the monthly maintainance
 */
 
 // Checks if the currency are the same
-if (User1currency != User4currency){
+if (User1.currency != User4.currency){
     console.log("Transfer failed: currency mismatch");
 }
 else{
-    if (amount > User1Balance){
-        console.log(`Withdrawal denied for ${User1Name}: Insufficient funds`);
+    if (amount > User1.balance){
+        console.log(`Withdrawal denied for ${User1.name}: Insufficient funds`);
     }
 
     else{
         
         // Deduct amount from User1 
-        User1Balance -= amount;
+        User1.balance -= amount;
         
         // Add amount from User4 
-        User4Balance += amount;
+        User4.balance += amount;
 
-        console.log(`Transaction successful from ${User1Name} to ${User4Name}`);
+        console.log(`Transaction successful from ${User1.name} to ${User4.name}`);
     }
 }
 console.log(""); // For extra line break
@@ -94,22 +74,22 @@ Same currency, transaction successful also does the monthly maintainance
 */
 
 // Checks if the currency are the same
-if (User2currency != User3currency){
+if (User2.currency != User3.currency){
     console.log("Transfer failed: currency mismatch");
 }
 else{
-    if (amount > User2Balance){
-        console.log(`Withdrawal denied for ${User2Name}: Insufficient funds`);
+    if (amount > User2.balance){
+        console.log(`Withdrawal denied for ${User2.name}: Insufficient funds`);
     }
 
     else{
         // Deduct amount from User2 
-        User2Balance -= amount;
+        User2.balance -= amount;
 
         // Add amount from User3 
-        User3Balance += amount;
+        User3.balance += amount;
        
-        console.log(`Transaction successful from ${User2Name} to ${User3Name}`)
+        console.log(`Transaction successful from ${User2.name} to ${User3.name}`)
     }
 }
 console.log("") // For extra line break
@@ -121,85 +101,85 @@ Different currency
 */
 
 // Checks if the currency are the same
-if (User1currency != User2currency){
+if (User1.currency != User2.currency){
     console.log("Transfer failed: currency mismatch");
 }
 else{
-    if (amount > User2Balance){
-        console.log(`Withdrawal denied for ${User2Name}: Insufficient funds`);
+    if (amount > User2.balance){
+        console.log(`Withdrawal denied for ${User2.name}: Insufficient funds`);
     }
 
     else{
         // Deduct amount from User2 
-        User2Balance -= amount;
+        User2.balance -= amount;
 
         // Add amount from User3 and caculates the savings 
-        User1Balance += amount;
+        User1.balance += amount;
         
-        console.log(`Transaction successful from ${User2Name} to ${User1Name}`);
+        console.log(`Transaction successful from ${User2.name} to ${User1.name}`);
     }
 }
 console.log("") // For extra line break
 
 // Bonus
-if (User1currency != User2currency){
+if (User1.currency != User2.currency){
     console.log("Retrying...")
     console.log("Converting...")
     //USD to NGN 1USD = 1500 NGN
-    if (User1currency == "USD"){
-        User1Balance *=  1500;
+    if (User1.currency == "USD"){
+        User1.balance *=  1500;
     }
-    if (amount > User2Balance){
-        console.log(`Withdrawal denied for ${User2Name}: Insufficient funds`);
+    if (amount > User2.balance){
+        console.log(`Withdrawal denied for ${User2.name}: Insufficient funds`);
     }
     else{
         // Deduct amount from User2 
-        User2Balance -= amount;
+        User2.balance -= amount;
 
         // Add amount from User1 
-        User1Balance += amount; 
-        User1Balance = parseInt(User1Balance /= 1500) // Converts back to USD
-        console.log(`Transaction successful from ${User2Name} to ${User1Name}`);
+        User1.balance += amount; 
+        console.log(`Transaction successful from ${User2.name} to ${User1.name}`);
     }
+        User1.balance = parseInt(User1.balance /= 1500) // Converts back to USD
 }
 console.log("") // For extra line break
 
 //Monthly Maintanace
 
 // User1 Maintanace
-if (User1type == "Savings"){
-    Savings = User1Balance * 0.2;
-    User1Balance += Savings;
+if (User1.type == "Savings"){
+    Savings = User1.balance * 0.2;
+    User1.balance += Savings;
 }
 else{
-    User1Balance = User1Balance - Checking;
+    User1.balance = User1.balance - Checking;
 }
 
 // User2 Maintanace
-if (User2type == "Savings"){
-    Savings = User2Balance * 0.2;
-    User2Balance += Savings;
+if (User2.type == "Savings"){
+    Savings = User2.balance * 0.2;
+    User2.balance += Savings;
 }
 else{
-    User2Balance = User2Balance - Checking;
+    User2.balance = User2.balance - Checking;
 }
 
 // User3 Maintanace
-if (User3type == "Savings"){
-    Savings = User3Balance * 0.2;
-    User3Balance += Savings;
+if (User3.type == "Savings"){
+    Savings = User3.balance * 0.2;
+    User3.balance += Savings;
 }
 else{
-    User3Balance = User3Balance - Checking;
+    User3.balance = User3.balance - Checking;
 }
 
 // User4 Maintanace
-if (User4type == "Savings"){
-    Savings = User4Balance * 0.2;
-    User4Balance += Savings;
+if (User4.type == "Savings"){
+    Savings = User4.balance * 0.2;
+    User4.balance += Savings;
 }
 else{
-    User4Balance = User4Balance - Checking;
+    User4.balance = User4.balance - Checking;
 }
 
 console.log("") // For extra line break
@@ -207,54 +187,54 @@ console.log("") // For extra line break
 // Comparisons Checks for the hightest amount
 
 // Before comparison convert User1 and User4 currency to NGN
-if (User1currency == "USD"){
-        User1Balance *=  1500;
+if (User1.currency == "USD"){
+        User1.balance *=  1500;
 }
-if (User4currency == "USD"){
-        User4Balance *=  1500;
+if (User4.currency == "USD"){
+        User4.balance *=  1500;
 }
 
 // Assume User1 is both the highest and lowest
-let highestUserName = User1Name;
-let highestUserBalance = User1Balance;
-let lowestUserName = User1Name;
-let lowestUserBalance = User1Balance;
+let highestUserName = User1.name;
+let highestUserBalance = User1.balance;
+let lowestUserName = User1.name;
+let lowestUserBalance = User1.balance;
 
 // checks for the highest
 // compares highestBalnce with User2Balance
-if (User2Balance > highestUserBalance){
-    highestUserName = User2Name;
-    highestUserBalance = User2Balance;
+if (User2.balance > highestUserBalance){
+    highestUserName = User2.name;
+    highestUserBalance = User2.balance;
 }
 
 //compares highestBalnce with User3Balance
-if(User3Balance > highestUserBalance){
-    highestUserName = User3Name;
-    highestUserBalance = User3Balance;
+if(User3.balance > highestUserBalance){
+    highestUserName = User3.name;
+    highestUserBalance = User3.balance;
 }
 
 //compares highestBalnce with User4Balance
-if (User4Balance > highestUserBalance){
-    highestUserName = User4Name;
-    highestUserBalance = User4Balance;
+if (User4.balance > highestUserBalance){
+    highestUserName = User4.name;
+    highestUserBalance = User4.balance;
 }
 
 
 // compares lowestBalnce with User2Balance
-if (User2Balance < lowestUserBalance){
-    lowestUserName = User2Name;
-    lowestUserBalance = User2Balance;
+if (User2.balance < lowestUserBalance){
+    lowestUserName = User2.name;
+    lowestUserBalance = User2.balance;
 }
 
 //compares lowestBalnce with User3Balance
-if(User3Balance < lowestUserBalance){
-    lowestUserName = User3Name;
-    lowestUserBalance = User3Balance;
+if(User3.balance < lowestUserBalance){
+    lowestUserName = User3.name;
+    lowestUserBalance = User3.balance;
 }
 //compares lowestBalnce with User4Balance
-if (User4Balance < lowestUserBalance){
-    lowestUserName = User4Name;
-    lowestUserBalance = User4Balance;
+if (User4.balance < lowestUserBalance){
+    lowestUserName = User4.name;
+    lowestUserBalance = User4.balance;
 }
 
 
@@ -262,8 +242,8 @@ console.log(`Highest Balance is ${highestUserBalance}. Account Name: ${highestUs
 console.log(`Lowest Balance is ${lowestUserBalance}. Account Name: ${lowestUserName} in NGN`);
 
 // convert User1 and User 4 back to USD
-User1Balance = parseInt(User1Balance / 1500);
-User4Balance = parseInt(User4Balance / 1500);
+User1.balance = parseInt(User1.balance / 1500);
+User4.balance = parseInt(User4.balance / 1500);
 
 console.log(""); // For extra line break
 
@@ -271,10 +251,10 @@ console.log(""); // For extra line break
 
 //User1
 let User1Staus;
-if (User1Balance > 0){
+if (User1.balance > 0){
     User1Staus = "Active";
 }
-else if (User1Balance === 0){
+else if (User1.balance === 0){
     User1Staus = "Empty";
 }
 else{
@@ -283,10 +263,10 @@ else{
 
 //User2
 let User2Staus;
-if (User2Balance > 0){
+if (User2.balance > 0){
     User2Staus = "Active";
 }
-else if (User2Balance === 0){
+else if (User2.balance === 0){
     User2Staus = "Empty";
 }
 else{
@@ -295,10 +275,10 @@ else{
 
 //User3
 let User3Staus;
-if (User3Balance > 0){
+if (User3.balance > 0){
     User3Staus = "Active";
 }
-else if (User3Balance === 0){
+else if (User3.balance === 0){
     User3Staus = "Empty";
 }
 else{
@@ -307,10 +287,10 @@ else{
 
 //User4
 let User4Staus;
-if (User4Balance > 0){
+if (User4.balance > 0){
     User4Staus = "Active";
 }
-else if (User4Balance === 0){
+else if (User4.balance === 0){
     User4Staus = "Empty";
 }
 else{
@@ -320,8 +300,8 @@ console.log("") // For extra line break
 
 
 console.log("===== Final Balance =====")
-console.log(`Account Name: ${User1Name}; Account Balance: ${User1Balance}; Currency: ${User1currency}; Account Type: ${User1type}; Account Status: ${User1Staus}`);
-console.log(`Account Name: ${User2Name}; Account Balance: ${User2Balance}; Currency: ${User2currency}; Account Type: ${User2type}; Account Status: ${User2Staus}`);
-console.log(`Account Name: ${User3Name}; Account Balance: ${User3Balance}; Currency: ${User3currency}; Account Type: ${User3type}; Account Status: ${User3Staus}`);
-console.log(`Account Name: ${User4Name}; Account Balance: ${User4Balance}; Currency: ${User4currency}; Account Type: ${User4type}; Account Status: ${User4Staus}`);
+console.log(`Account Name: ${User1.name}; Account Balance: ${User1.balance}; Currency: ${User1.currency}; Account Type: ${User1.type}; Account Status: ${User1Staus}`);
+console.log(`Account Name: ${User2.name}; Account Balance: ${User2.balance}; Currency: ${User2.currency}; Account Type: ${User2.type}; Account Status: ${User2Staus}`);
+console.log(`Account Name: ${User3.name}; Account Balance: ${User3.balance}; Currency: ${User3.currency}; Account Type: ${User3.type}; Account Status: ${User3Staus}`);
+console.log(`Account Name: ${User4.name}; Account Balance: ${User4.balance}; Currency: ${User4.currency}; Account Type: ${User4.type}; Account Status: ${User4Staus}`);
 
